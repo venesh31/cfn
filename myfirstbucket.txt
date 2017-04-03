@@ -1,0 +1,13 @@
+
+{
+    "Resources" : {
+        "Iamawesome32" : {
+            
+            "Type" : "AWS::S3::Bucket",
+            "Properties" : {
+                "AccessControl" : "Private",
+            }
+            
+        }
+    }
+}

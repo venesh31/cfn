@@ -1,0 +1,61 @@
+ { 
+   "AWSTemplateFormatVersion": "2010-09-09",
+    
+      "Description" : "Creating an EC2 Instance inside a security group with keypair as parameter, creating s3 bucket with public read assiging to false",
+       "Parameters" : {
+            "keypair" : {
+            "Type" : "String"
+          }
+        },
+        "Resources" : {
+            "Iamawesome31" : {
+            
+                "Type" : "AWS::S3::Bucket",
+                "Properties" : {
+                    "AccessControl" : "Private"
+                }  
+            
+        },
+
+        
+        "Ec2Instance" : {
+	        "Type" : "AWS::EC2::Instance",
+	          "Properties" : {
+	            "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+	           "ImageId" : "ami-a58d0dc5",
+              "InstanceType" : "t2.micro"
+      
+	          }
+            },
+        
+
+          "UserData": {
+                "Fn::Base64" :  {
+                    "Fn::Join" : [
+                        "\n",
+                        [
+                            "#!/bin/bash",
+                            "sudo apt-get install apache2",
+                            "sudo apt-get install git"
+                        ]
+                      ]
+                 }      
+                }
+                
+           },
+       
+    
+        "InstanceSecurityGroup" : {
+            "Type" : "AWS::EC2::SecurityGroup",
+            "Properties" : {
+                "GroupDescription" : "Enable SSH access via port22",
+                "SecurityGroupIngress" : [ {
+                  "IpProtocol" : "tcp",
+                  "FromPort"  : "22",
+                  "ToPort"  : "22",
+                  "CidrIp" : "0.0.0.0/0" } ]
+      } 
+    } 
+     
+  
+}
