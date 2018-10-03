@@ -5,7 +5,7 @@
 	  "Type" : "AWS::EC2::Instance",
 	  "Properties" : {
 	    "SecurityGroups" : [ {"Ref" : "InstanceSecurityGroup"} ],
-	    "ImageId" : "ami-a58d0dc5",
+	    "ImageId" : "ami-0ff8a91507f77f867",
       "InstanceType" : "t2.micro"
       
 	  }
